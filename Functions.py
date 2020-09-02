@@ -17,8 +17,10 @@ def get_gal_catalogue(snapshot_used):
     # import meraxes and set little h to 0.7
     fname_in = "imapping_testrun/meraxes.hdf5"
     h = meraxes.set_little_h(0.7)
-    gals, sim_props = meraxes.read_gals(fname_in, snapshot_used, sim_props=True)
-    snaplist = meraxes.io.read_snaplist(fname_in, h)
+    gals, sim_props = meraxes.read_gals(fname_in, snapshot_used, sim_props=True, pandas=True)
+    # returns snap list regardless of snap used, just to get all useful variables with one function
+    snaplist = meraxes.io.read_snaplist(fname_in, h)    
+
     return gals, sim_props, snaplist
     
 def ALICE_mass_function(mass, volume, bins, range): # kwargs allows additional args to be read in
@@ -73,7 +75,7 @@ def return_himf_for_Gal_Types(gals, sim_props, range_in):
     return himf_Types
 
     
-def Random_Sample_Gals(gals, k):
+def Random_Sample_Gals(gals, k): # USED when NOT using PANDAS
     
     # Calculates the number of galaxies in catalogue 'gals'
     gal_num = len(gals)
