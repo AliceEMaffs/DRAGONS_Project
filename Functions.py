@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt  # plotting library
 from dragons import meraxes, munge
 import random
 import sys
+from statistics import mean
 
 def get_gal_catalogue(snapshot_used):
     # import meraxes and set little h to 0.7
@@ -94,3 +95,11 @@ def Random_Sample_Gals(gals, k): # USED when NOT using PANDAS
     #print('selected_gal_properties = ', selected_gal_properties)
 
     return selected_gal_properties
+
+def best_fit_slope_and_intercept(xs,ys):
+    m = (((mean(xs)*mean(ys)) - mean(xs*ys)) /
+         ((mean(xs)*mean(xs)) - mean(xs*xs)))
+    
+    b = mean(ys) - m*mean(xs)
+    
+    return m, b
