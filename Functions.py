@@ -103,3 +103,24 @@ def best_fit_slope_and_intercept(xs,ys):
     b = mean(ys) - m*mean(xs)
     
     return m, b
+
+def return_3d_pos(gals):
+	# returns (n,d) array of [x,y,z]
+	pos_x = gals["Pos_0"]
+	pos_y = gals["Pos_1"]
+	pos_z = gals["Pos_2"]
+	Pos = np.array([pos_x, pos_y, pos_z])
+	Pos_new=Pos.T # Transpose the Pos so it is in format (N,D) array
+	return pos_x, pos_y, pos_z, Pos, Pos_new
+
+def get_units:
+	# You can also see the units of all galaxy properties (and grids properties if
+	# they are present).  Here I am only printing the galaxy properties.
+	fname_in = "imapping_testrun/meraxes.hdf5"
+    h = meraxes.set_little_h(0.7)
+    units = meraxes.read_units(fname_in)
+	print('\nunits\n=====')
+	for k, v in units.items():
+	    if not isinstance(v, dict):
+	        print(k, ':', v.decode('utf-8'))
+	print()
